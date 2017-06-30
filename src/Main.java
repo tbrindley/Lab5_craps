@@ -80,7 +80,7 @@ public class Main {
         else {
             output = " ";
         }
-            if (dice1 == dice2) {
+            if (dice1 == dice2 && hardway) {
                 if (total == 4 || total == 10 || total == 6 || total == 8) {
                     output = output + "the hard way!";
                 }
