@@ -1,15 +1,26 @@
 /**
  * Created by Travis Brindley on 6/28/2017.
- * <p>
- * Assignment:  User gets to play craps
+ *
+ * Assignment:  User gets to play Craps
  */
 
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
-
-    public static void instructions() {
+    private static void firstPrompt() {
+        System.out.print("Press 1 for instructions \n Press 2 to play  ");
+        Scanner scan = new Scanner(System.in);
+        int selection = scan.nextInt();
+        while (selection > 2 || selection < 1) {
+            System.out.println("I'm sorry, this is not a valid input. Press 1 to play \n Press 2 to read the instructions");
+            selection = scan.nextInt();
+        }
+        if (selection == 1) {
+            instructions();
+        }
+    }
+    private static void instructions() {
         System.out.println("Craps Instructions");
         System.out.println("===================");
         System.out.println("Any Craps: Wins if a 2, 3 or 12 is thrown. Payoff 8:1");
@@ -20,10 +31,10 @@ public class Main {
         System.out.println("Hardways: The bet on a hardway number wins if it's thrown hard (sum of pairs: 1-1, 3-3, 4-4...) before it's rolled easy and a 7 is thrown. Payoffs: Hard 4 and 10, 8:1; Hard 6 and 8, 10:1");
 
     }
-
-    public static boolean anyCrap(int dice1, int dice2, boolean anycrap) {
+    private static boolean anyCrap(int dice1, int dice2, boolean anycrap) {
         boolean status = anycrap;
-        if (status != false) {
+
+        if (status != false) {  //if the player has already shot a "craps", this if statement will not run.
             int total = dice1 + dice2;
             if (total == 3 || total == 11) {
                 status = false;
@@ -33,10 +44,9 @@ public class Main {
         }
         return status;
     }
-
-    public static boolean shotSeven(int dice1, int dice2, boolean seven) {
+    private static boolean shotSeven(int dice1, int dice2, boolean seven) {
         boolean status = seven;
-        if (status != false) {
+        if (status != false) { //if the player has already shot a seven, this if statement will not run
             int total = dice1 + dice2;
             if (total == 7) {
                 status = false;
@@ -46,18 +56,16 @@ public class Main {
         }
         return status;
     }
-
-    public static boolean stillHardway(boolean anycrap, boolean seven) {
+    private static boolean stillHardway(boolean anycrap, boolean seven) {
         boolean status;
-        if (anycrap == false && seven == false) {
+        if (anycrap == false && seven == false) { //checks to see if player can still win, "the hard way"
             status = false;
         } else {
             status = true;
         }
         return status;
     }
-
-    public static String didIWin(int dice1, int dice2, boolean hardway) {
+    private static String didIWin(int dice1, int dice2, boolean hardway) {
 
         String output;
         int total = dice1 + dice2;
@@ -80,21 +88,19 @@ public class Main {
         else {
             output = " ";
         }
-            if (dice1 == dice2 && hardway) {
-                if (total == 4 || total == 10 || total == 6 || total == 8) {
-                    output = output + "the hard way!";
+        if (dice1 == dice2 && hardway) {
+            if (total == 4 || total == 10 || total == 6 || total == 8) {
+                    output = output + "The hard way!";
                 }
             }
 
         return output;
     }
-
-    public static int rollIt() {
+    private static int rollIt() {
         int dice = ThreadLocalRandom.current().nextInt(1, 6 + 1);
         return dice;
     }
-
-    public static void play() {
+    private static void play() {
         Scanner scan = new Scanner(System.in);
         boolean keepPlaying = true;
         boolean hardway;
@@ -124,20 +130,7 @@ public class Main {
         }
 
     }
-
-    public static void firstPrompt() {
-        System.out.print("Press 1 for instructions \n Press 2 to play  ");
-        Scanner scan = new Scanner(System.in);
-        int selection = scan.nextInt();
-        while (selection > 2 || selection < 1) {
-            System.out.println("I'm sorry, this is not a valid input. Press 1 to play \n Press 2 to read the instructions");
-            selection = scan.nextInt();
-        }
-        if (selection == 1) {
-            instructions();
-        }
-    }
-
+    
     public static void main(String[] args) {
         System.out.println("Welcome to the Grand Circus Casino!");
         firstPrompt();
