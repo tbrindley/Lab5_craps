@@ -124,13 +124,18 @@ public class Main {
             System.out.println("\n Want to roll again?(Y/N)");
             String loop = scan.nextLine();
 
+            while (!loop.equalsIgnoreCase("y") && !loop.equalsIgnoreCase("n")){
+                System.out.println("\n Invalid input.  Want to roll again?(Y/N)");
+                loop = scan.nextLine();
+            }
+            
             if(loop.equalsIgnoreCase("n")){
                 keepPlaying = false;
             }
         }
 
     }
-    
+
     public static void main(String[] args) {
         System.out.println("Welcome to the Grand Circus Casino!");
         firstPrompt();
